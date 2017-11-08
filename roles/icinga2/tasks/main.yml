@@ -1,0 +1,34 @@
+---
+
+- name: install icinga repo
+  yum:
+    name: "https://packages.icinga.com/epel/icinga-rpm-release-7-latest.noarch.rpm"
+    state: installed
+
+- name: install required packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - icinga2
+    - icinga2-selinux
+    - icingaweb2
+    - icingaweb2-selinux
+
+- name: enable httpd
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: allow ports 22, 80, 443 through host firewall
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    with_items:
+      - http
+      - https
+      - ssh
+
+...
