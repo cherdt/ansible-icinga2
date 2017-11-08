@@ -40,6 +40,8 @@
       AuthName "Icinga Web 2"
       AuthUserFile /etc/icingaweb2/.http-users
       Require valid-user
+  notify:
+  - restart apache
 
 - name: copy PHP config
   copy:
