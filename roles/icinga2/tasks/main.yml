@@ -30,10 +30,18 @@
     group: icingaweb2
     mode: 0640
 
+- name: configure auth for icingaweb2
+  copy:
+    src: authentication.ini
+    dest: /etc/icingaweb2/authentication.ini
+    owner: root
+    group: icingaweb2
+    mode: 0644
+
 - name: configure web UI to use basic auth
   blockinfile:
     path: /etc/httpd/conf.d/icingaweb2.conf 
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
     insertafter: '<Directory "/usr/share/icingaweb2/public">'
     content: |
       AuthType Basic
