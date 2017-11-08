@@ -21,6 +21,14 @@
     state: started
     enabled: yes
 
+- name: copy PHP config
+  copy:
+    src: timezone.ini
+    dest: /etc/php.d/timezone.ini
+    owner: root
+    group: root
+    mode: 0644
+
 - name: allow ports 22, 80, 443 through host firewall
   firewalld:
     service: "{{ item }}"
