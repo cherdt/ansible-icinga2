@@ -12,8 +12,20 @@
   with_items:
     - icinga2
     - icinga2-selinux
+    - icingacli
     - icingaweb2
     - icingaweb2-selinux
+    - nagios-plugins
+    - nagios-plugins-ping
+    - nagios-plugins-disk
+    - nagios-plugins-procs
+    - nagios-plugins-users
+    - nagios-plugins-load
+    - nagios-plugins-ssh
+    - nagios-plugins-swap
+    - nagios-plugins-http
+    - nagios-plugins-dummy
+
 
 - name: enable httpd
   systemd:
