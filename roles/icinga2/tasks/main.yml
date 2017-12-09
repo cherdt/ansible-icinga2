@@ -7,7 +7,7 @@
 
 - name: install EPEL, SCL repos
   yum:
-    name: "{{ items }}"
+    name: "{{ item }}"
     state: installed
   with_items:
     - epel-release
@@ -39,6 +39,11 @@
     - nagios-plugins-http
     - nagios-plugins-dummy
 
+- name: enable php-fpm
+  systemd:
+    name: rh-php71-php-fpm
+    state: started
+    enabled: yes
 
 - name: enable httpd
   systemd:
@@ -79,7 +84,7 @@
 - name: copy PHP config
   copy:
     src: timezone.ini
-    dest: /etc/php.d/timezone.ini
+    dest: /etc/opt/rh/rh-php71/php.d/40-timezone.ini
     owner: root
     group: root
     mode: 0644
