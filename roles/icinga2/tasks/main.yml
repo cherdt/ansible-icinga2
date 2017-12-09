@@ -38,6 +38,7 @@
     - nagios-plugins-swap
     - nagios-plugins-http
     - nagios-plugins-dummy
+    - sclo-php71-php-pecl-imagick
 
 - name: enable php-fpm
   systemd:
