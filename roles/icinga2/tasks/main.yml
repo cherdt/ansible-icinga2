@@ -28,6 +28,8 @@
     - icingacli
     - icingaweb2
     - icingaweb2-selinux
+    - mariadb
+    - mariadb-server
     - nagios-plugins
     - nagios-plugins-ping
     - nagios-plugins-disk
@@ -38,7 +40,9 @@
     - nagios-plugins-swap
     - nagios-plugins-http
     - nagios-plugins-dummy
+    - php-pecl-imagick
     - sclo-php71-php-pecl-imagick
+  notify: "restart php-fpm"
 
 - name: enable php-fpm
   systemd:
