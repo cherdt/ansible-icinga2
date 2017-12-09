@@ -104,6 +104,14 @@
     state: import
     target: /usr/share/doc/icingaweb2/schema/mysql.schema.sql
 
+- name: add MySQL user to icingaweb2 DB
+  mysql_user:
+    name: icinga
+    password: icinga
+    host: localhost
+    priv: "icingaweb2.*:ALL"
+    state: present
+
 - name: allow ports 22, 80, 443 through host firewall
   firewalld:
     service: "{{ item }}"
