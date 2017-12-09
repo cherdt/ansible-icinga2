@@ -24,6 +24,7 @@
     state: latest
   with_items:
     - icinga2
+    - icinga2-ido-mysql
     - icinga2-selinux
     - icingacli
     - icingaweb2
@@ -123,7 +124,7 @@
     state: present
 
 - name: enable icinga features
-    shell: "icinga2 feature enable {{ item }}"
+  command: "icinga2 feature enable {{ item }}"
   with_items:
     - ido-mysql
     - api
