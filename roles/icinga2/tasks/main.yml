@@ -44,17 +44,15 @@
     - sclo-php71-php-pecl-imagick
   notify: "restart php-fpm"
 
-- name: enable php-fpm
+- name: enable servicves
   systemd:
-    name: rh-php71-php-fpm
+    name: "{{ item }}" 
     state: started
     enabled: yes
-
-- name: enable httpd
-  systemd:
-    name: httpd
-    state: started
-    enabled: yes
+  with_items:
+    - rh-php71-php-fpm
+    - httpd
+    - mariadb
 
 - name: set basic auth password
   htpasswd:
