@@ -5,9 +5,17 @@
     name: "https://packages.icinga.com/epel/icinga-rpm-release-7-latest.noarch.rpm"
     state: installed
 
-- name: install EPEL repo
+- name: install EPEL, SCL repos
   yum:
-    name: epel-release
+    name: "{{ items }}"
+    state: installed
+  with_items:
+    - epel-release
+    - centos-release-scl
+
+- name: install Apache (may need to be installed before other packages)
+  yum:
+    name: httpd
     state: installed
 
 - name: install required packages
