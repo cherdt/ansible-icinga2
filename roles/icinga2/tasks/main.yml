@@ -30,6 +30,7 @@
     - icingaweb2-selinux
     - mariadb
     - mariadb-server
+    - MySQL-python
     - nagios-plugins
     - nagios-plugins-ping
     - nagios-plugins-disk
