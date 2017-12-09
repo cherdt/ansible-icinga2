@@ -5,6 +5,11 @@
     name: "https://packages.icinga.com/epel/icinga-rpm-release-7-latest.noarch.rpm"
     state: installed
 
+- name: install EPEL repo
+  yum:
+    name: epel-release
+    state: installed
+
 - name: install required packages
   yum:
     name: "{{ item }}"
