@@ -78,18 +78,40 @@
     - resources.ini
     - roles.ini
 
+- name: create enabledModules directory for icingaweb2
+  file:
+    path: "/etc/icingaweb2/enabledModules"
+    state: directory
+    owner: apache
+    group: icingaweb2
+    mode: 0750
+
+- name: create module directories for icingaweb2
+  file:
+    path: "/etc/icingaweb2/modules/{{ item }}"
+    state: directory
+    owner: apache
+    group: icingaweb2
+    mode: 0660
+  with_items:
+    - monitoring
+
 - name: copy module config files for icingaweb2
   copy:
-    src: "{{ item }}"
+    src: "monitoring/{{ item }}"
     dest: "/etc/icingaweb2/modules/monitoring/{{ item }}"
     owner: apache
     group: icingaweb2
     mode: 0660
+  with_items:
+    - backends.ini
+    - commandtransports.ini
+    - config.ini
 
 - name: link from icingaweb2 enabledModules to modules
   file:
-    src: /etc/icingaweb2/modules/{{ item }} 
-    dest: /etc/icingaweb2/enabledModules/{{ item }}
+    src: "/user/share/icingaweb2/modules/{{ item }}"
+    dest: "/etc/icingaweb2/enabledModules/{{ item }}"
     owner: apache
     group: icingaweb2
     state: link
