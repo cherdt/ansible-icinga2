@@ -93,7 +93,7 @@
     state: directory
     owner: apache
     group: icingaweb2
-    mode: 0660
+    mode: 0760
   with_items:
     - monitoring
 
