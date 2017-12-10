@@ -188,6 +188,14 @@
     - ido-mysql
 #    - api
 
+- name: copy ido-mysql config
+  copy:
+    src: ido-mysql.conf
+    dest: /etc/icinga2/features-available/ido-mysql.conf
+    owner: icinga
+    group: icinga
+    mode: 0640
+
 - name: Add default Apache index page
   copy:
     src: index.html
