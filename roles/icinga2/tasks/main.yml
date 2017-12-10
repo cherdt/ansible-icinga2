@@ -143,6 +143,11 @@
     - ido-mysql
 #    - api
 
+- name: Add default Apache index page
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+
 - name: allow ports 22, 80, 443 through host firewall
   firewalld:
     service: "{{ item }}"
