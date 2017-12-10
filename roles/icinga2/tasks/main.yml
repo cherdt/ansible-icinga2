@@ -134,14 +134,14 @@
   mysql_db:
     name: ido-mysql
     state: present
-  register: ido-mysql
+  register: ido_mysql
 
 - name: import icinga-ido-mysql schema
   mysql_db:
     name: ido-mysql
     state: import
     target: /usr/share/icinga2-ido-mysql/schema/mysql.sql
-  when: ido-mysql.changed
+  when: "ido_mysql.changed"
 
 - name: allow ports 22, 80, 443 through host firewall
   firewalld:
