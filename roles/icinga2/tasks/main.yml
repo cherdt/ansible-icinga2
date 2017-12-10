@@ -65,21 +65,18 @@
     group: icingaweb2
     mode: 0640
 
-- name: configure auth for icingaweb2
+- name: copy config files for icingaweb2
   copy:
-    src: authentication.ini
-    dest: /etc/icingaweb2/authentication.ini
+    src: "{{ item }}"
+    dest: "/etc/icingaweb2/{{ item }}"
     owner: apache
     group: icingaweb2
     mode: 0644
-
-- name: configure MySQL settings for icingaweb2
-  copy:
-    src: resources.ini
-    dest: /etc/icingaweb2/resources.ini
-    owner: apache
-    group: icingaweb2
-    mode: 0644
+  with_items:
+    - authentication.ini
+    - config.ini
+    - resources.ini
+    - roles.ini
 
 - name: configure web UI to use basic auth
   blockinfile:
@@ -97,7 +94,7 @@
 - name: require auth user for web UI
   lineinfile:
     path: /etc/httpd/conf.d/icingaweb2.conf
-    regexp: '^Require all granted$'
+    regexp: 'Require all granted$'
     line: 'Require valid-user'
 
 - name: copy PHP config
