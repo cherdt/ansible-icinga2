@@ -111,7 +111,7 @@
 
 - name: link from icingaweb2 enabledModules to modules
   file:
-    src: "/user/share/icingaweb2/modules/{{ item }}"
+    src: "/usr/share/icingaweb2/modules/{{ item }}"
     dest: "/etc/icingaweb2/enabledModules/{{ item }}"
     owner: apache
     group: icingaweb2
