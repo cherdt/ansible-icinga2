@@ -115,21 +115,6 @@
     target: /usr/share/doc/icingaweb2/schema/mysql.schema.sql
   when: "mysql_db.changed"
 
-- name: add MySQL user to icingaweb2 DB
-  mysql_user:
-    name: icinga
-    password: icinga
-    host: localhost
-    priv: "icingaweb2.*:ALL"
-    state: present
-
-- name: enable icinga features
-  command: "icinga2 feature enable {{ item }}"
-  notify: restart icinga2
-  with_items:
-    - ido-mysql
-#    - api
-
 - name: create ido-mysql database
   mysql_db:
     name: ido-mysql
@@ -142,6 +127,21 @@
     state: import
     target: /usr/share/icinga2-ido-mysql/schema/mysql.sql
   when: "ido_mysql.changed"
+
+- name: add MySQL user to icingaweb2 DB
+  mysql_user:
+    name: icinga
+    password: icinga
+    host: localhost
+    priv: "icingaweb2.*:ALL/ido-mysql.*:ALL"
+    state: present
+
+- name: enable icinga features
+  command: "icinga2 feature enable {{ item }}"
+  notify: restart icinga2
+  with_items:
+    - ido-mysql
+#    - api
 
 - name: allow ports 22, 80, 443 through host firewall
   firewalld:
