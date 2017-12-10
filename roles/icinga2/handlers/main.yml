@@ -10,4 +10,9 @@
     name: rh-php71-php-fpm
     state: restarted
 
+- name: restart icinga2
+  systemd:
+    name: icinga2
+    state: restarted
+
 ...
