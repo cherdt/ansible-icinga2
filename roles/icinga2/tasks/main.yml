@@ -61,7 +61,7 @@
     path: /etc/icingaweb2/.http-users
     name: icingaadmin
     password: 'icingaadmin'
-    owner: root
+    owner: apache
     group: icingaweb2
     mode: 0640
 
@@ -71,12 +71,31 @@
     dest: "/etc/icingaweb2/{{ item }}"
     owner: apache
     group: icingaweb2
-    mode: 0644
+    mode: 0660
   with_items:
     - authentication.ini
     - config.ini
     - resources.ini
     - roles.ini
+
+- name: copy module config files for icingaweb2
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/icingaweb2/modules/monitoring/{{ item }}"
+    owner: apache
+    group: icingaweb2
+    mode: 0660
+
+- name: link from icingaweb2 enabledModules to modules
+  file:
+    src: /etc/icingaweb2/modules/{{ item }} 
+    dest: /etc/icingaweb2/enabledModules/{{ item }}
+    owner: apache
+    group: icingaweb2
+    state: link
+  with_items:
+    - monitoring
+    - setup
 
 - name: configure web UI to use basic auth
   blockinfile:
