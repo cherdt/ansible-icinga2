@@ -1,11 +1,12 @@
 # ansible-icinga2
-Ansible role to install Icinga 2.x
+Ansible role to install Icinga 2.x with:
 
-Note that this is currently a work-in-progress.
+* Apache BasicAuth with an AuthUserFile
+* MySQL backend
 
 # Playbook to help install Icinga 2.x on CentOS 7
 
-Why? Because it's a pain to install but maybe you just want to take it for a test drive.
+Why? Because Icinga2 + Icingaweb2 is a pain to install and configure. If you just want to take it for a no-hassles test drive, this is good starting point.
 
 ## Assumptions
 
