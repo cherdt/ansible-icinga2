@@ -123,8 +123,8 @@
 - name: configure web UI to use basic auth
   blockinfile:
     path: /etc/httpd/conf.d/icingaweb2.conf 
-    marker: "# {mark} ANSIBLE MANAGED BLOCK"
-    insertafter: '<Directory "/usr/share/icingaweb2/public">'
+    marker: "# {mark} CONFIGURE BASIC AUTH (EXTERNAL AUTHENTICATION)"
+    insertbefore: '</Directory>'
     content: |
       AuthType Basic
       AuthName "Icinga Web 2"
@@ -132,12 +132,6 @@
       Require valid-user
   notify:
   - restart apache
-
-- name: require auth user for web UI
-  lineinfile:
-    path: /etc/httpd/conf.d/icingaweb2.conf
-    regexp: 'Require all granted$'
-    line: 'Require valid-user'
 
 - name: copy PHP config
   copy:
