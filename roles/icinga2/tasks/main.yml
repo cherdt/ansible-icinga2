@@ -136,8 +136,8 @@
 - name: require auth user for web UI
   lineinfile:
     path: /etc/httpd/conf.d/icingaweb2.conf
-    regexp: 'Require all granted$'
-    line: 'Require valid-user'
+    insertbefore: 'Require all granted$'
+    line: '            Require valid-user'
 
 - name: copy PHP config
   copy:
